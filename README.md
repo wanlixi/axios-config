@@ -1,7 +1,7 @@
 # axios-config
 axios的一些配置
 
-
+## axios 的初始化配置
 ### src/api/axios-config.js
 
 ```
@@ -51,16 +51,41 @@ const fetch = (url, method, data) => {
 
 export default fetch;
 ```
-
+## 接口文件
 ### src/api/index.js
 
 ```
 immport fetch from './axios-config'
 
 export default {
-  getUserInfo () {
+  getUserInfo (userId) {
     return fetch('/user?userId=${userId}')
   },
   ...
 }
+```
+
+## 全局注入
+### src/main.js
+
+```
+import api from './api'
+import Vue from 'vue'
+Vue.prototype.$api = api
+```
+
+## 使用实例：
+### src/module/index.vue
+
+```
+<template>
+
+</template>
+<script type="text/babel">
+export default {
+  mounted () {
+    this.$api.getUserInfo(this.userId)
+  }
+}
+</script>
 ```
