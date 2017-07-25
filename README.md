@@ -83,8 +83,20 @@ Vue.prototype.$api = api
 </template>
 <script type="text/babel">
 export default {
+  data () {
+    return {
+        userId: 10,
+        userInfo: {}
+    }
+  },
   mounted () {
     this.$api.getUserInfo(this.userId)
+        .then( res => {
+            this.userInfo = res.data
+        })
+        .catch( err => {
+            //
+        })
   }
 }
 </script>
